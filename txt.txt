@@ -1,0 +1,26 @@
+npm install -g @nestjs/cli
+nest new nestprisma
+npm install prisma --save-dev ]
+npx prisma
+npx prisma init
+npx prisma migrate dev --name init
+npm install @prisma/client
+nest g service prisma{
+    
+  import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
+  import { PrismaClient } from '@prisma/client';
+
+  @Injectable()
+    export class PrismaService extends PrismaClient implements OnModuleInit {
+      async onModuleInit() {
+        await this.$connect();
+      }
+
+      async enableShutdownHooks(app: INestApplication) {
+        this.$on('beforeExit', async () => {
+          await app.close();
+        });
+      }
+    }
+}
+npm install class-validator
